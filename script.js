@@ -79,7 +79,15 @@ function handleUserInput() {
     chatbotInput.value = '';
 }
 
+const exploreFutureButton = document.getElementById('explore-future-btn');
+
 openChatbotButton.addEventListener('click', () => {
+    chatbotContainer.style.display = 'flex';
+    openChatbotButton.style.display = 'none';
+});
+
+exploreFutureButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the anchor tag from navigating
     chatbotContainer.style.display = 'flex';
     openChatbotButton.style.display = 'none';
 });
