@@ -38,22 +38,33 @@ const knowledgeBase = {
 };
 
 function addMessage(message, sender) {
-    const messageElement = document.createElement('p');
-    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chatbot-message', sender); // sender is 'user' or 'bot'
+    messageElement.textContent = message;
     chatbotMessages.appendChild(messageElement);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
 
 function getBotResponse(userInput) {
-    const lowercasedInput = userInput.toLowerCase().trim();
-    if (knowledgeBase[lowercasedInput]) {
-        return knowledgeBase[lowercasedInput];
+    const input = userInput.toLowerCase().trim();
+
+    // Use keywords for matching
+    if (input.includes("comfort") || (input.includes("buy") && input.includes("shoes"))) {
+        return knowledgeBase["how do I buy comfortable shoes?"];
     }
-    for (const key in knowledgeBase) {
-        if (lowercasedInput.includes(key.split(' ')[0])) {
-             return knowledgeBase[key];
-        }
+    if (input.includes("care") || input.includes("feet")) {
+        return knowledgeBase["what are the benefits of caring for my feet?"];
     }
+    if (input.includes("replace") || input.includes("often")) {
+        return knowledgeBase["how often should I replace my shoes?"];
+    }
+    if (input.includes("socks")) {
+        return knowledgeBase["what kind of socks are best?"];
+    }
+    if (input.includes("hello") || input.includes("hi")) {
+        return knowledgeBase["hello"];
+    }
+
     return "I'm sorry, I don't have an answer for that. Please ask me about buying comfortable shoes or the benefits of foot care.";
 }
 
@@ -61,19 +72,21 @@ function handleUserInput() {
     const userInput = chatbotInput.value;
     if (userInput.trim() === '') return;
 
-    addMessage(userInput, 'You');
+    addMessage(userInput, 'user');
     const botResponse = getBotResponse(userInput);
-    setTimeout(() => addMessage(botResponse, 'Bot'), 500);
+    setTimeout(() => addMessage(botResponse, 'bot'), 500);
 
     chatbotInput.value = '';
 }
 
 openChatbotButton.addEventListener('click', () => {
     chatbotContainer.style.display = 'flex';
+    openChatbotButton.style.display = 'none';
 });
 
 closeChatbotButton.addEventListener('click', () => {
     chatbotContainer.style.display = 'none';
+    openChatbotButton.style.display = 'block';
 });
 
 chatbotSubmit.addEventListener('click', handleUserInput);
