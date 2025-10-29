@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="datetime-container"></div>
     <div class="container">
         <header>
             <img src="https://res.cloudinary.com/dguzb0u6h/image/upload/v1761720017/cld-sample-5.jpg" alt="Futuristic cityscape" class="header-image">
@@ -17,6 +18,20 @@
             <a href="#" class="cta-button">Explore the Future</a>
         </main>
     </div>
+
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <span>Chat with us!</span>
+            <button id="close-chatbot">-</button>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Ask a question...">
+            <button id="chatbot-submit">Send</button>
+        </div>
+    </div>
+    <button id="open-chatbot">Chat</button>
+
     <script src="script.js"></script>
 </body>
 </html>
